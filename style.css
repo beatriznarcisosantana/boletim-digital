@@ -1,0 +1,171 @@
+/* ===== RESET BÁSICO ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* ===== CORES PRINCIPAIS (variáveis) ===== */
+/* Uma variável guarda um valor para reutilizar no código */
+:root {
+  --roxo: #6a3fa0;         /* cor principal */
+  --roxo-claro: #efe6f7;   /* fundo suave roxo */
+  --rosa-claro: #fbe4ef;   /* cor secundária */
+  --cinza-texto: #444;
+  --cinza-borda: #e0e0e0;
+}
+
+/* ===== CORPO DA PÁGINA ===== */
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: #ffffff;
+  color: var(--cinza-texto);
+  line-height: 1.5;
+  padding-bottom: 40px;
+}
+
+/* ===== CABEÇALHO ===== */
+.cabecalho {
+  background-color: var(--roxo);
+  color: #ffffff;
+  padding: 24px 16px;
+  text-align: center;
+}
+
+.cabecalho h1 {
+  font-size: 1.8rem;
+}
+
+.subtitulo {
+  font-size: 1rem;
+  margin-top: 4px;
+  opacity: 0.9;
+}
+
+/* ===== CONTEÚDO PRINCIPAL ===== */
+.conteudo {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 20px 16px;
+}
+
+/* ===== CARDS DE RESUMO ===== */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+.card {
+  background: #ffffff;
+  border: 1px solid var(--cinza-borda);
+  border-radius: 8px;
+  overflow: hidden; /* para a faixa respeitar o arredondamento */
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+/* Faixa colorida no topo de cada card */
+.card-faixa {
+  height: 6px;
+  background-color: var(--roxo);
+}
+
+.card-corpo {
+  padding: 14px 16px;
+}
+
+.card-titulo {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  color: #888;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+}
+
+.card-valor {
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: var(--roxo);
+}
+
+/* ===== ÁREA DA TABELA ===== */
+.tabela-area h2 {
+  font-size: 1.2rem;
+  color: var(--roxo);
+  margin-bottom: 12px;
+}
+
+/* Permite rolar horizontalmente em telas pequenas */
+.tabela-responsiva {
+  overflow-x: auto;
+  border-radius: 8px;
+  border: 1px solid var(--cinza-borda);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 640px; /* força rolagem no celular */
+  font-size: 0.9rem;
+}
+
+thead {
+  background-color: var(--roxo);
+  color: #ffffff;
+}
+
+th, td {
+  padding: 10px 12px;
+  text-align: center;
+  border-bottom: 1px solid var(--cinza-borda);
+}
+
+th:first-child, td:first-child {
+  text-align: left;
+}
+
+/* Linhas alternadas (zebra) */
+tbody tr:nth-child(even) {
+  background-color: #faf7fd;
+}
+
+/* ===== SITUAÇÕES ===== */
+.situacao {
+  display: inline-block;
+  padding: 3px 8px;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  font-weight: bold;
+}
+
+.situacao.bom {
+  background-color: var(--roxo-claro);
+  color: var(--roxo);
+}
+
+.situacao.atencao {
+  background-color: var(--rosa-claro);
+  color: #b03a6f;
+}
+
+.situacao.sem-nota {
+  background-color: #f0f0f0;
+  color: #777;
+}
+
+/* ===== RESPONSIVIDADE ===== */
+@media (max-width: 600px) {
+  .cabecalho h1 {
+    font-size: 1.5rem;
+  }
+
+  .card-valor {
+    font-size: 1.2rem;
+  }
+
+  th, td {
+    padding: 8px;
+    font-size: 0.85rem;
+  }
+}
