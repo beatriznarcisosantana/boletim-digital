@@ -13,6 +13,8 @@
   --rosa-claro: #fbe4ef;   /* cor secundária */
   --cinza-texto: #444;
   --cinza-borda: #e0e0e0;
+  --vermelho-erro: #d9534f;
+  --verde-sucesso: #2e7d32;
 }
 
 /* ===== CORPO DA PÁGINA ===== */
@@ -104,68 +106,4 @@ body {
 }
 
 table {
-  width: 100%;
-  border-collapse: collapse;
-  min-width: 640px; /* força rolagem no celular */
-  font-size: 0.9rem;
-}
-
-thead {
-  background-color: var(--roxo);
-  color: #ffffff;
-}
-
-th, td {
-  padding: 10px 12px;
-  text-align: center;
-  border-bottom: 1px solid var(--cinza-borda);
-}
-
-th:first-child, td:first-child {
-  text-align: left;
-}
-
-/* Linhas alternadas (zebra) */
-tbody tr:nth-child(even) {
-  background-color: #faf7fd;
-}
-
-/* ===== SITUAÇÕES ===== */
-.situacao {
-  display: inline-block;
-  padding: 3px 8px;
-  border-radius: 12px;
-  font-size: 0.8rem;
-  font-weight: bold;
-}
-
-.situacao.bom {
-  background-color: var(--roxo-claro);
-  color: var(--roxo);
-}
-
-.situacao.atencao {
-  background-color: var(--rosa-claro);
-  color: #b03a6f;
-}
-
-.situacao.sem-nota {
-  background-color: #f0f0f0;
-  color: #777;
-}
-
-/* ===== RESPONSIVIDADE ===== */
-@media (max-width: 600px) {
-  .cabecalho h1 {
-    font-size: 1.5rem;
-  }
-
-  .card-valor {
-    font-size: 1.2rem;
-  }
-
-  th, td {
-    padding: 8px;
-    font-size: 0.85rem;
-  }
-}
+  width: 10
