@@ -106,4 +106,189 @@ body {
 }
 
 table {
-  width: 10
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 640px; /* força rolagem no celular */
+  font-size: 0.9rem;
+}
+
+thead {
+  background-color: var(--roxo);
+  color: #ffffff;
+}
+
+th, td {
+  padding: 10px 12px;
+  text-align: center;
+  border-bottom: 1px solid var(--cinza-borda);
+}
+
+th:first-child, td:first-child {
+  text-align: left;
+}
+
+/* Linhas alternadas (zebra) */
+tbody tr:nth-child(even) {
+  background-color: #faf7fd;
+}
+
+/* ===== SITUAÇÕES ===== */
+.situacao {
+  display: inline-block;
+  padding: 3px 8px;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  font-weight: bold;
+}
+
+.situacao.bom {
+  background-color: var(--roxo-claro);
+  color: var(--roxo);
+}
+
+.situacao.atencao {
+  background-color: var(--rosa-claro);
+  color: #b03a6f;
+}
+
+.situacao.sem-nota {
+  background-color: #f0f0f0;
+  color: #777;
+}
+
+/* ===== NOVOS ESTILOS ADICIONADOS ===== */
+
+/* Área de Login */
+.area-login {
+  max-width: 400px;
+  margin: 40px auto;
+  padding: 24px;
+  border: 1px solid var(--cinza-borda);
+  border-radius: 8px;
+  background-color: #ffffff;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  text-align: center;
+}
+
+.area-login h2 {
+  color: var(--roxo);
+  margin-bottom: 16px;
+  font-size: 1.3rem;
+}
+
+.login-box p {
+  margin-bottom: 16px;
+  color: var(--cinza-texto);
+}
+
+.campo-grupo {
+  margin-bottom: 16px;
+  text-align: left;
+}
+
+.campo-grupo label {
+  display: block;
+  font-size: 0.85rem;
+  margin-bottom: 6px;
+  color: var(--cinza-texto);
+}
+
+.campo-grupo input,
+.tabela-responsiva input {
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid var(--cinza-borda);
+  border-radius: 4px;
+  font-size: 0.9rem;
+}
+
+.tabela-responsiva input.campo-invalido {
+  border-color: var(--vermelho-erro);
+  background-color: #fdf2f2;
+}
+
+/* Botões */
+.btn-principal {
+  background-color: var(--roxo);
+  color: #ffffff;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 4px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.btn-principal:hover {
+  opacity: 0.9;
+}
+
+.btn-secundario {
+  background-color: #e0e0e0;
+  color: var(--cinza-texto);
+  border: none;
+  padding: 10px 18px;
+  border-radius: 4px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-left: 8px;
+}
+
+.btn-secundario:hover {
+  background-color: #d0d0d0;
+}
+
+/* Painel e Edição */
+.acoes-painel {
+  margin-bottom: 20px;
+  text-align: right;
+}
+
+.area-edicao {
+  background-color: #faf7fd;
+  border: 1px solid var(--cinza-borda);
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 30px;
+}
+
+.area-edicao h2 {
+  color: var(--roxo);
+  margin-bottom: 16px;
+  font-size: 1.2rem;
+}
+
+.botoes-edicao {
+  margin-top: 16px;
+  text-align: right;
+}
+
+.mensagem-status {
+  margin-top: 12px;
+  font-size: 0.85rem;
+  font-weight: bold;
+}
+
+.mensagem-status.erro {
+  color: var(--vermelho-erro);
+}
+
+.mensagem-status.sucesso {
+  color: var(--verde-sucesso);
+}
+
+/* ===== RESPONSIVIDADE ===== */
+@media (max-width: 600px) {
+  .cabecalho h1 {
+    font-size: 1.5rem;
+  }
+
+  .card-valor {
+    font-size: 1.2rem;
+  }
+
+  th, td {
+    padding: 8px;
+    font-size: 0.85rem;
+  }
+}
