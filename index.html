@@ -12,37 +12,89 @@
   <!-- Cabeçalho -->
   <header class="cabecalho">
     <h1>Boletim Digital</h1>
-    <p class="subtitulo">8º Ano</p>
+    <p class="subtitulo">8º Ano - Turma 8B (Nº 5)</p>
   </header>
 
   <main class="conteudo">
 
-    <!-- Área dos cards de resumo -->
-    <section class="cards" id="cards">
-      <!-- Os cards serão criados pelo JavaScript -->
-    </section>
-
-    <!-- Tabela de notas -->
-    <section class="tabela-area">
-      <h2>Notas por disciplina</h2>
-      <div class="tabela-responsiva">
-        <table>
-          <thead>
-            <tr>
-              <th>Disciplina</th>
-              <th>1º Tri</th>
-              <th>2º Tri</th>
-              <th>3º Tri</th>
-              <th>Média</th>
-              <th>Faltas</th>
-              <th>Situação</th>
-            </tr>
-          </thead>
-          <!-- As linhas serão preenchidas pelo JavaScript -->
-          <tbody id="corpo-tabela"></tbody>
-        </table>
+    <!-- Área de Acesso por PIN -->
+    <section id="area-login" class="area-login">
+      <h2>Acesso ao Boletim</h2>
+      <div class="login-box">
+        <p><strong>Turma:</strong> 8B | <strong>Chamada:</strong> 5</p>
+        <div class="campo-grupo">
+          <label for="input-pin">Digite seu PIN:</label>
+          <input type="password" id="input-pin" maxlength="10" placeholder="PIN de acesso">
+        </div>
+        <button id="btn-entrar" class="btn-principal">Entrar</button>
+        <p id="msg-login" class="mensagem-status"></p>
       </div>
     </section>
+
+    <!-- Conteúdo do Boletim (inicialmente escondido) -->
+    <div id="painel-boletim" style="display: none;">
+
+      <!-- Controles de Ação -->
+      <div class="acoes-painel">
+        <button id="btn-alterar-dados" class="btn-secundario">Alterar dados</button>
+      </div>
+
+      <!-- Área do formulário de edição (inicialmente escondida) -->
+      <section id="area-edicao" class="area-edicao" style="display: none;">
+        <h2>Editar Notas e Faltas</h2>
+        <form id="form-edicao">
+          <div class="tabela-responsiva">
+            <table>
+              <thead>
+                <tr>
+                  <th>Disciplina</th>
+                  <th>1º Tri (Nota)</th>
+                  <th>2º Tri (Nota)</th>
+                  <th>3º Tri (Nota)</th>
+                  <th>1º Tri (Faltas)</th>
+                  <th>2º Tri (Faltas)</th>
+                  <th>3º Tri (Faltas)</th>
+                </tr>
+              </thead>
+              <tbody id="corpo-edicao"></tbody>
+            </table>
+          </div>
+          <div class="botoes-edicao">
+            <button type="button" id="btn-salvar" class="btn-principal">Salvar alterações</button>
+            <button type="button" id="btn-cancelar" class="btn-secundario">Cancelar</button>
+          </div>
+          <p id="msg-edicao" class="mensagem-status"></p>
+        </form>
+      </section>
+
+      <!-- Área dos cards de resumo -->
+      <section class="cards" id="cards">
+        <!-- Os cards serão criados pelo JavaScript -->
+      </section>
+
+      <!-- Tabela de notas -->
+      <section class="tabela-area">
+        <h2>Notas por disciplina</h2>
+        <div class="tabela-responsiva">
+          <table>
+            <thead>
+              <tr>
+                <th>Disciplina</th>
+                <th>1º Tri</th>
+                <th>2º Tri</th>
+                <th>3º Tri</th>
+                <th>Média</th>
+                <th>Faltas</th>
+                <th>Situação</th>
+              </tr>
+            </thead>
+            <!-- As linhas serão preenchidas pelo JavaScript -->
+            <tbody id="corpo-tabela"></tbody>
+          </table>
+        </div>
+      </section>
+
+    </div>
 
   </main>
 
