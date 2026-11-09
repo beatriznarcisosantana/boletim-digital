@@ -277,7 +277,75 @@ tbody tr:nth-child(even) {
   color: var(--verde-sucesso);
 }
 
+/* ===== ÁREA DOS GRÁFICOS ===== */
+.area-graficos {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+  margin-bottom: 32px;
+}
+
+.grafico-card {
+  background: #ffffff;
+  border: 1px solid var(--cinza-borda);
+  border-radius: 8px;
+  padding: 16px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.grafico-card.card-perigo {
+  border-color: var(--vermelho-erro);
+  box-shadow: 0 0 8px rgba(217, 83, 79, 0.3);
+}
+
+.grafico-card h2 {
+  font-size: 1.05rem;
+  color: var(--roxo);
+  margin-bottom: 12px;
+}
+
+.cabecalho-grafico-faltas {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.cabecalho-grafico-faltas h2 {
+  margin-bottom: 0;
+}
+
+.badge-perigo {
+  background-color: var(--vermelho-erro);
+  color: #ffffff;
+  font-size: 0.75rem;
+  font-weight: bold;
+  padding: 3px 8px;
+  border-radius: 12px;
+  letter-spacing: 0.5px;
+}
+
+.grafico-container {
+  position: relative;
+  flex: 1;
+  width: 100%;
+  min-height: 250px;
+}
+
+.grafico-container.container-vertical {
+  min-height: 450px;
+}
+
 /* ===== RESPONSIVIDADE ===== */
+@media (max-width: 900px) {
+  .area-graficos {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
 @media (max-width: 600px) {
   .cabecalho h1 {
     font-size: 1.5rem;
@@ -291,4 +359,10 @@ tbody tr:nth-child(even) {
     padding: 8px;
     font-size: 0.85rem;
   }
-}
+
+  .area-graficos {
+    grid-template-columns: 1fr;
+  }
+
+  .grafico-container.
+ 
