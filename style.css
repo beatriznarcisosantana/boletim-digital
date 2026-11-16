@@ -1,368 +1,150 @@
-/* ===== RESET BÁSICO ===== */
+/* Configurações gerais da página */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-/* ===== CORES PRINCIPAIS (variáveis) ===== */
-/* Uma variável guarda um valor para reutilizar no código */
-:root {
-  --roxo: #6a3fa0;         /* cor principal */
-  --roxo-claro: #efe6f7;   /* fundo suave roxo */
-  --rosa-claro: #fbe4ef;   /* cor secundária */
-  --cinza-texto: #444;
-  --cinza-borda: #e0e0e0;
-  --vermelho-erro: #d9534f;
-  --verde-sucesso: #2e7d32;
-}
-
-/* ===== CORPO DA PÁGINA ===== */
 body {
-  font-family: Arial, Helvetica, sans-serif;
-  background-color: #ffffff;
-  color: var(--cinza-texto);
+  background-color: #f3f4f6; /* Fundo cinza bem claro */
+  color: #1f2937; /* Texto cinza bem escuro (grafite) */
   line-height: 1.5;
-  padding-bottom: 40px;
 }
 
-/* ===== CABEÇALHO ===== */
+/* Centraliza o conteúdo na tela */
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Cabeçalho em cinza escuro */
 .cabecalho {
-  background-color: var(--roxo);
+  background-color: #374151;
   color: #ffffff;
-  padding: 24px 16px;
-  text-align: center;
+  padding: 28px 0;
+  margin-bottom: 28px;
 }
 
 .cabecalho h1 {
   font-size: 1.8rem;
+  font-weight: 700;
 }
 
 .subtitulo {
+  color: #d1d5db; /* Cinza claro para o subtítulo */
   font-size: 1rem;
   margin-top: 4px;
-  opacity: 0.9;
 }
 
-/* ===== CONTEÚDO PRINCIPAL ===== */
-.conteudo {
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 20px 16px;
-}
-
-/* ===== CARDS DE RESUMO ===== */
-.cards {
+/* Grade dos cards de resumo */
+.cards-resumo {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
   gap: 16px;
   margin-bottom: 32px;
 }
 
+/* Estilo individual de cada card (branco e cantos arredondados) */
 .card {
-  background: #ffffff;
-  border: 1px solid var(--cinza-borda);
-  border-radius: 8px;
-  overflow: hidden; /* para a faixa respeitar o arredondamento */
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-}
-
-/* Faixa colorida no topo de cada card */
-.card-faixa {
-  height: 6px;
-  background-color: var(--roxo);
-}
-
-.card-corpo {
-  padding: 14px 16px;
+  background-color: #ffffff;
+  border-radius: 14px;
+  padding: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
 }
 
 .card-titulo {
   font-size: 0.85rem;
+  color: #6b7280;
+  font-weight: 600;
   text-transform: uppercase;
-  color: #888;
-  letter-spacing: 0.5px;
-  margin-bottom: 6px;
 }
 
 .card-valor {
-  font-size: 1.4rem;
-  font-weight: bold;
-  color: var(--roxo);
+  font-size: 1.75rem;
+  color: #111827;
+  font-weight: 700;
 }
 
-/* ===== ÁREA DA TABELA ===== */
-.tabela-area h2 {
+.card-detalhe {
+  font-size: 0.8rem;
+  color: #6b7280;
+}
+
+/* Seção da tabela */
+.secao-tabela {
+  background-color: #ffffff;
+  border-radius: 14px;
+  padding: 24px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  margin-bottom: 40px;
+}
+
+.secao-tabela h2 {
   font-size: 1.2rem;
-  color: var(--roxo);
-  margin-bottom: 12px;
+  margin-bottom: 16px;
+  color: #374151;
 }
 
-/* Permite rolar horizontalmente em telas pequenas */
+/* Faz a tabela rolar horizontalmente no celular sem quebrar o site */
 .tabela-responsiva {
+  width: 100%;
   overflow-x: auto;
-  border-radius: 8px;
-  border: 1px solid var(--cinza-borda);
 }
 
 table {
   width: 100%;
   border-collapse: collapse;
-  min-width: 640px; /* força rolagem no celular */
-  font-size: 0.9rem;
-}
-
-thead {
-  background-color: var(--roxo);
-  color: #ffffff;
+  min-width: 650px; /* Garante leitura confortável no celular */
 }
 
 th, td {
-  padding: 10px 12px;
-  text-align: center;
-  border-bottom: 1px solid var(--cinza-borda);
-}
-
-th:first-child, td:first-child {
+  padding: 12px 14px;
   text-align: left;
+  border-bottom: 1px solid #e5e7eb;
+  font-size: 0.95rem;
 }
 
-/* Linhas alternadas (zebra) */
-tbody tr:nth-child(even) {
-  background-color: #faf7fd;
+th {
+  background-color: #f9fafb;
+  color: #4b5563;
+  font-weight: 600;
 }
 
-/* ===== SITUAÇÕES ===== */
+tbody tr:hover {
+  background-color: #f9fafb;
+}
+
+/* Etiquetas coloridas suaves para a coluna Situação */
 .situacao {
   display: inline-block;
-  padding: 3px 8px;
-  border-radius: 12px;
+  padding: 4px 10px;
+  border-radius: 999px;
   font-size: 0.8rem;
-  font-weight: bold;
+  font-weight: 600;
 }
 
-.situacao.bom {
-  background-color: var(--roxo-claro);
-  color: var(--roxo);
+.situacao-bom {
+  background-color: #dcfce7;
+  color: #166534;
 }
 
-.situacao.atencao {
-  background-color: var(--rosa-claro);
-  color: #b03a6f;
+.situacao-atencao {
+  background-color: #fef3c7;
+  color: #92400e;
 }
 
-.situacao.sem-nota {
-  background-color: #f0f0f0;
-  color: #777;
+.situacao-indisponivel {
+  background-color: #f3f4f6;
+  color: #4b5563;
 }
 
-/* ===== NOVOS ESTILOS ADICIONADOS ===== */
-
-/* Área de Login */
-.area-login {
-  max-width: 400px;
-  margin: 40px auto;
-  padding: 24px;
-  border: 1px solid var(--cinza-borda);
-  border-radius: 8px;
-  background-color: #ffffff;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
-  text-align: center;
-}
-
-.area-login h2 {
-  color: var(--roxo);
-  margin-bottom: 16px;
-  font-size: 1.3rem;
-}
-
-.login-box p {
-  margin-bottom: 16px;
-  color: var(--cinza-texto);
-}
-
-.campo-grupo {
-  margin-bottom: 16px;
-  text-align: left;
-}
-
-.campo-grupo label {
-  display: block;
+.nota-ausente {
+  color: #9ca3af;
+  font-style: italic;
   font-size: 0.85rem;
-  margin-bottom: 6px;
-  color: var(--cinza-texto);
 }
-
-.campo-grupo input,
-.tabela-responsiva input {
-  width: 100%;
-  padding: 8px 12px;
-  border: 1px solid var(--cinza-borda);
-  border-radius: 4px;
-  font-size: 0.9rem;
-}
-
-.tabela-responsiva input.campo-invalido {
-  border-color: var(--vermelho-erro);
-  background-color: #fdf2f2;
-}
-
-/* Botões */
-.btn-principal {
-  background-color: var(--roxo);
-  color: #ffffff;
-  border: none;
-  padding: 10px 18px;
-  border-radius: 4px;
-  font-weight: bold;
-  cursor: pointer;
-  transition: opacity 0.2s;
-}
-
-.btn-principal:hover {
-  opacity: 0.9;
-}
-
-.btn-secundario {
-  background-color: #e0e0e0;
-  color: var(--cinza-texto);
-  border: none;
-  padding: 10px 18px;
-  border-radius: 4px;
-  font-weight: bold;
-  cursor: pointer;
-  margin-left: 8px;
-}
-
-.btn-secundario:hover {
-  background-color: #d0d0d0;
-}
-
-/* Painel e Edição */
-.acoes-painel {
-  margin-bottom: 20px;
-  text-align: right;
-}
-
-.area-edicao {
-  background-color: #faf7fd;
-  border: 1px solid var(--cinza-borda);
-  border-radius: 8px;
-  padding: 20px;
-  margin-bottom: 30px;
-}
-
-.area-edicao h2 {
-  color: var(--roxo);
-  margin-bottom: 16px;
-  font-size: 1.2rem;
-}
-
-.botoes-edicao {
-  margin-top: 16px;
-  text-align: right;
-}
-
-.mensagem-status {
-  margin-top: 12px;
-  font-size: 0.85rem;
-  font-weight: bold;
-}
-
-.mensagem-status.erro {
-  color: var(--vermelho-erro);
-}
-
-.mensagem-status.sucesso {
-  color: var(--verde-sucesso);
-}
-
-/* ===== ÁREA DOS GRÁFICOS ===== */
-.area-graficos {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 18px;
-  margin-bottom: 32px;
-}
-
-.grafico-card {
-  background: #ffffff;
-  border: 1px solid var(--cinza-borda);
-  border-radius: 8px;
-  padding: 16px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-  display: flex;
-  flex-direction: column;
-  transition: border-color 0.3s, box-shadow 0.3s;
-}
-
-.grafico-card.card-perigo {
-  border-color: var(--vermelho-erro);
-  box-shadow: 0 0 8px rgba(217, 83, 79, 0.3);
-}
-
-.grafico-card h2 {
-  font-size: 1.05rem;
-  color: var(--roxo);
-  margin-bottom: 12px;
-}
-
-.cabecalho-grafico-faltas {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 12px;
-}
-
-.cabecalho-grafico-faltas h2 {
-  margin-bottom: 0;
-}
-
-.badge-perigo {
-  background-color: var(--vermelho-erro);
-  color: #ffffff;
-  font-size: 0.75rem;
-  font-weight: bold;
-  padding: 3px 8px;
-  border-radius: 12px;
-  letter-spacing: 0.5px;
-}
-
-.grafico-container {
-  position: relative;
-  flex: 1;
-  width: 100%;
-  min-height: 250px;
-}
-
-.grafico-container.container-vertical {
-  min-height: 450px;
-}
-
-/* ===== RESPONSIVIDADE ===== */
-@media (max-width: 900px) {
-  .area-graficos {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-}
-
-@media (max-width: 600px) {
-  .cabecalho h1 {
-    font-size: 1.5rem;
-  }
-
-  .card-valor {
-    font-size: 1.2rem;
-  }
-
-  th, td {
-    padding: 8px;
-    font-size: 0.85rem;
-  }
-
-  .area-graficos {
-    grid-template-columns: 1fr;
-  }
-
-  .grafico-container.
- 
