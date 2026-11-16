@@ -1,23 +1,3 @@
-### Passo 3: Criar o arquivo `script.js`
-
-No seu editor do **github.dev**, crie um novo arquivo na raiz do projeto chamado exatamente **`script.js`**.
-
-**Para que ele serve?**
-O `script.js` é o "cérebro" do boletim. Ele pega os dados brutos das 15 disciplinas, corrige as notas para a escala de 0 a 10, calcula as médias e faltas e preenche tanto a tabela quanto os cards do topo automaticamente.
-
-Antes de colar, veja rapidamente o que cada palavra nova faz no código:
-
-* **Variável (`const` / `let`):** Uma caixinha com nome onde guardamos uma informação (como uma nota ou um texto).
-* **Array (`[ ... ]`):** Uma lista ordenada que guarda vários itens juntos (como a lista das 15 disciplinas).
-* **Objeto (`{ ... }`):** Um pacote de informações sobre uma mesma coisa, com nome e valor (ex: `{ disciplina: "Arte", tri1: 9.0 }`).
-* **Função (`function`):** Um bloco de instruções reutilizável que recebe dados, faz um cálculo e devolve um resultado.
-* **Condicional (`if`):** Uma decisão no código ("se isso acontecer, faça aquilo").
-* **Loop (`forEach`):** Um comando que percorre cada item de uma lista, um por um, repetindo a mesma tarefa.
-* **DOM (`document.getElementById`):** A ponte que permite ao JavaScript encontrar elementos do `index.html` e colocar texto ou linhas dentro deles.
-
-Cole o código completo abaixo dentro do seu **`script.js`**:
-
-```javascript
 // Array de objetos com os dados brutos fictícios do 8º Ano
 const dadosBoletim = [
   { disciplina: "Língua Portuguesa", tri1: 82, tri2: "7,8", tri3: 85, faltas: [2, 1, 1] },
@@ -178,7 +158,3 @@ function renderizarBoletim() {
 
 // Executa tudo assim que a página carrega
 renderizarBoletim();
-
-```
-
-Cole esse código no arquivo `script.js` no github.dev e me responda **"feito"** quando terminar!
