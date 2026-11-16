@@ -13,71 +13,103 @@
   <header class="cabecalho">
     <div class="container">
       <h1>Boletim Digital</h1>
-      <p class="subtitulo">8º Ano • Estudante Exemplo</p>
+      <p class="subtitulo">8º Ano • Turma 8B • Chamada 5</p>
     </div>
   </header>
 
   <main class="container">
-    
-    <!-- Área superior com os 5 cards de resumo -->
-    <section class="cards-resumo" aria-label="Resumo do desempenho">
-      
-      <div class="card">
-        <span class="card-titulo">Média Geral</span>
-        <strong class="card-valor" id="media-geral">—</strong>
-        <span class="card-detalhe">Escala de 0 a 10</span>
-      </div>
 
-      <div class="card">
-        <span class="card-titulo">Total de Faltas</span>
-        <strong class="card-valor" id="total-faltas">—</strong>
-        <span class="card-detalhe">Soma dos trimestres</span>
-      </div>
-
-      <div class="card">
-        <span class="card-titulo">Bom Desempenho</span>
-        <strong class="card-valor" id="qtd-bom">—</strong>
-        <span class="card-detalhe">Média igual ou acima de 6,0</span>
-      </div>
-
-      <div class="card">
-        <span class="card-titulo">Precisam de Atenção</span>
-        <strong class="card-valor" id="qtd-atencao">—</strong>
-        <span class="card-detalhe">Média abaixo de 6,0</span>
-      </div>
-
-      <div class="card">
-        <span class="card-titulo">Frequência Geral</span>
-        <strong class="card-valor" id="frequencia-valor">92%</strong>
-        <span class="card-detalhe" id="frequencia-texto">Frequência adequada</span>
-      </div>
-
+    <!-- Área de acesso por PIN -->
+    <section class="card-acesso" id="secao-acesso" aria-label="Acesso ao boletim">
+      <h2>Acesso do Estudante</h2>
+      <p class="acesso-info">8º Ano • Turma 8B • Chamada 5</p>
+      <form id="form-acesso" class="form-acesso">
+        <label for="input-pin" class="sr-only">PIN</label>
+        <input
+          type="password"
+          id="input-pin"
+          placeholder="Digite seu PIN"
+          autocomplete="off"
+          required
+        >
+        <button type="submit" id="btn-entrar" class="btn-primario">Entrar</button>
+      </form>
+      <p id="mensagem-acesso" class="mensagem-status" aria-live="polite"></p>
     </section>
 
-    <!-- Seção da tabela de notas -->
-    <section class="secao-tabela">
-      <h2>Desempenho por Disciplina</h2>
-      
-      <!-- Div que permite rolar a tabela para o lado no celular -->
-      <div class="tabela-responsiva">
-        <table>
-          <thead>
-            <tr>
-              <th>Disciplina</th>
-              <th>1º Tri</th>
-              <th>2º Tri</th>
-              <th>3º Tri</th>
-              <th>Média</th>
-              <th>Faltas</th>
-              <th>Situação</th>
-            </tr>
-          </thead>
-          <!-- O JavaScript vai inserir as 15 disciplinas aqui dentro -->
-          <tbody id="tabela-corpo">
-          </tbody>
-        </table>
-      </div>
-    </section>
+    <!-- Conteúdo do boletim (exibido após autenticação) -->
+    <div id="conteudo-boletim" hidden>
+
+      <!-- Área superior com os 5 cards de resumo -->
+      <section class="cards-resumo" aria-label="Resumo do desempenho">
+        
+        <div class="card">
+          <span class="card-titulo">Média Geral</span>
+          <strong class="card-valor" id="media-geral">—</strong>
+          <span class="card-detalhe">Escala de 0 a 10</span>
+        </div>
+
+        <div class="card">
+          <span class="card-titulo">Total de Faltas</span>
+          <strong class="card-valor" id="total-faltas">—</strong>
+          <span class="card-detalhe">Soma dos trimestres</span>
+        </div>
+
+        <div class="card">
+          <span class="card-titulo">Bom Desempenho</span>
+          <strong class="card-valor" id="qtd-bom">—</strong>
+          <span class="card-detalhe">Média igual ou acima de 6,0</span>
+        </div>
+
+        <div class="card">
+          <span class="card-titulo">Precisam de Atenção</span>
+          <strong class="card-valor" id="qtd-atencao">—</strong>
+          <span class="card-detalhe">Média abaixo de 6,0</span>
+        </div>
+
+        <div class="card">
+          <span class="card-titulo">Frequência Geral</span>
+          <strong class="card-valor" id="frequencia-valor">92%</strong>
+          <span class="card-detalhe" id="frequencia-texto">Frequência adequada</span>
+        </div>
+
+      </section>
+
+      <!-- Seção da tabela de notas -->
+      <section class="secao-tabela">
+        <div class="tabela-topo">
+          <h2>Desempenho por Disciplina</h2>
+          <div class="acoes-edicao">
+            <button type="button" id="btn-alterar" class="btn-secundario">Alterar dados</button>
+            <button type="button" id="btn-salvar" class="btn-primario" hidden>Salvar alterações</button>
+            <button type="button" id="btn-cancelar" class="btn-cancelar" hidden>Cancelar</button>
+          </div>
+        </div>
+
+        <p id="mensagem-edicao" class="mensagem-status" aria-live="polite"></p>
+        
+        <!-- Div que permite rolar a tabela para o lado no celular -->
+        <div class="tabela-responsiva">
+          <table>
+            <thead>
+              <tr id="tabela-cabecalho">
+                <th>Disciplina</th>
+                <th>1º Tri</th>
+                <th>2º Tri</th>
+                <th>3º Tri</th>
+                <th>Média</th>
+                <th>Faltas</th>
+                <th>Situação</th>
+              </tr>
+            </thead>
+            <!-- O JavaScript vai inserir as disciplinas aqui dentro -->
+            <tbody id="tabela-corpo">
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+    </div>
 
   </main>
 
