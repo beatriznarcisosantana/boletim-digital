@@ -306,3 +306,87 @@ tbody tr:hover {
   border-color: #dc2626 !important;
   background-color: #fef2f2 !important;
 }
+
+/* =========================================================
+   Área dos Gráficos (Etapa 3)
+   ========================================================= */
+.area-graficos {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+  margin-bottom: 32px;
+}
+
+.grafico-card {
+  background-color: #ffffff;
+  border-radius: 14px;
+  padding: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  border: 1px solid #e5e7eb;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.grafico-topo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 14px;
+  min-height: 28px;
+}
+
+.grafico-card h2 {
+  font-size: 1.05rem;
+  color: #374151;
+  font-weight: 700;
+  margin: 0;
+}
+
+.grafico-container {
+  position: relative;
+  width: 100%;
+  height: 360px;
+  flex: 1;
+}
+
+.badge-perigo {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  background-color: #fee2e2;
+  color: #b91c1c;
+  border: 1px solid #fca5a5;
+  white-space: nowrap;
+}
+
+.grafico-card-perigo {
+  border: 2px solid #dc2626;
+  box-shadow: 0 4px 12px rgba(220, 38, 38, 0.14);
+}
+
+/* Tablet: 2 colunas lado a lado + 1 abaixo */
+@media (max-width: 992px) {
+  .area-graficos {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* Celular: 1 coluna */
+@media (max-width: 640px) {
+  .area-graficos {
+    grid-template-columns: 1fr;
+  }
+
+  .grafico-container {
+    height: 270px;
+  }
+
+  .grafico-container-disciplinas {
+    height: 400px;
+  }
+}

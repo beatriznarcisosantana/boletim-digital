@@ -27,6 +27,11 @@ let pinSessao = "";
 let dadosBoletim = [];
 let modoEdicao = false;
 
+// Instâncias dos gráficos (camada somente leitura)
+let graficoMedias = null;
+let graficoEvolucao = null;
+let graficoFaltas = null;
+
 // Converte qualquer formato de nota antiga para a escala de 0 a 10
 function normalizarNota(valor) {
   if (valor === null || valor === undefined || valor === "") {
@@ -338,6 +343,310 @@ function alternarBotoesEdicao(editando) {
   document.getElementById("btn-cancelar").hidden = !editando;
 }
 
+// =========================================================
+// CAMADA DE GRÁFICOS (SOMENTE LEITURA SOBRE dadosBoletim)
+// =========================================================
+
+function atualizarGraficoMedias() {
+  const canvas = document.getElementById("graficoMediasDisciplinas");
+  if (!canvas || typeof Chart === "undefined") {
+    return;
+  }
+
+  if (graficoMedias) {
+    graficoMedias.destroy();
+  }
+
+  const copia = dadosBoletim.map(item => {
+    const media = calcularMedia(item.tri1, item.tri2, item.tri3);
+    return {
+      disciplina: item.disciplina,
+      media: media !== null ? Number(media.toFixed(1)) : null
+    };
+  });
+
+  const labels = copia.map(item => item.disciplina);
+  const valores = copia.map(item => item.media);
+  const coresFundo = valores.map(valor => {
+    if (valor === null) {
+      return "rgba(156, 163, 175, 0.5)";
+    }
+    return valor >= 6.0 ? "rgba(22, 101, 52, 0.78)" : "rgba(217, 119, 6, 0.82)";
+  });
+  const coresBorda = valores.map(valor => {
+    if (valor === null) {
+      return "#9ca3af";
+    }
+    return valor >= 6.0 ? "#166534" : "#b45309";
+  });
+
+  graficoMedias = new Chart(canvas, {
+    type: "bar",
+    data: {
+      labels: labels,
+      datasets: [
+        {
+          label: "Média",
+          data: valores,
+          backgroundColor: coresFundo,
+          borderColor: coresBorda,
+          borderWidth: 1,
+          borderRadius: 4
+        }
+      ]
+    },
+    options: {
+      indexAxis: "y",
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: {
+          display: false
+        },
+        tooltip: {
+          callbacks: {
+            label: function (contexto) {
+              const valor = contexto.parsed.x;
+              if (valor === null || valor === undefined) {
+                return contexto.label + ": Sem nota";
+              }
+              return contexto.label + ": " + valor.toFixed(1).replace(".", ",");
+            }
+          }
+        }
+      },
+      scales: {
+        x: {
+          min: 0,
+          max: 10,
+          ticks: {
+            color: "#4b5563",
+            stepSize: 2
+          },
+          grid: {
+            color: "#e5e7eb"
+          }
+        },
+        y: {
+          ticks: {
+            color: "#374151",
+            autoSkip: false,
+            font: {
+              size: 11
+            }
+          },
+          grid: {
+            display: false
+          }
+        }
+      }
+    }
+  });
+}
+
+function atualizarGraficoEvolucao() {
+  const canvas = document.getElementById("graficoEvolucaoTrimestres");
+  if (!canvas || typeof Chart === "undefined") {
+    return;
+  }
+
+  if (graficoEvolucao) {
+    graficoEvolucao.destroy();
+  }
+
+  const chavesTrimestres = ["tri1", "tri2", "tri3"];
+  const mediasTrimestrais = chavesTrimestres.map(chave => {
+    const notasValidas = dadosBoletim
+      .map(item => item[chave])
+      .filter(nota => nota !== null && nota !== undefined);
+
+    if (notasValidas.length === 0) {
+      return null;
+    }
+
+    const soma = notasValidas.reduce((acumulador, nota) => acumulador + nota, 0);
+    return Number((soma / notasValidas.length).toFixed(1));
+  });
+
+  graficoEvolucao = new Chart(canvas, {
+    type: "line",
+    data: {
+      labels: ["1º Tri", "2º Tri", "3º Tri"],
+      datasets: [
+        {
+          label: "Média Geral",
+          data: mediasTrimestrais,
+          borderColor: "#374151",
+          backgroundColor: "rgba(55, 65, 81, 0.14)",
+          pointBackgroundColor: "#374151",
+          pointBorderColor: "#ffffff",
+          pointBorderWidth: 2,
+          pointRadius: 5,
+          pointHoverRadius: 7,
+          borderWidth: 3,
+          tension: 0.25,
+          fill: true,
+          spanGaps: false
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: {
+          display: false
+        },
+        tooltip: {
+          callbacks: {
+            label: function (contexto) {
+              const valor = contexto.parsed.y;
+              if (valor === null || valor === undefined) {
+                return "Média: Sem notas lançadas";
+              }
+              return "Média: " + valor.toFixed(1).replace(".", ",");
+            }
+          }
+        }
+      },
+      scales: {
+        y: {
+          min: 0,
+          max: 10,
+          ticks: {
+            color: "#4b5563",
+            stepSize: 2
+          },
+          grid: {
+            color: "#e5e7eb"
+          }
+        },
+        x: {
+          ticks: {
+            color: "#374151",
+            font: {
+              weight: "600"
+            }
+          },
+          grid: {
+            display: false
+          }
+        }
+      }
+    }
+  });
+}
+
+function atualizarGraficoFaltas() {
+  const canvas = document.getElementById("graficoFaltasTrimestres");
+  if (!canvas || typeof Chart === "undefined") {
+    return;
+  }
+
+  if (graficoFaltas) {
+    graficoFaltas.destroy();
+  }
+
+  let faltasTri1 = 0;
+  let faltasTri2 = 0;
+  let faltasTri3 = 0;
+
+  dadosBoletim.forEach(item => {
+    const listaFaltas = Array.isArray(item.faltas) ? item.faltas : [0, 0, 0];
+    faltasTri1 += Number(listaFaltas[0]) || 0;
+    faltasTri2 += Number(listaFaltas[1]) || 0;
+    faltasTri3 += Number(listaFaltas[2]) || 0;
+  });
+
+  const totalFaltas = faltasTri1 + faltasTri2 + faltasTri3;
+  const situacaoCritica = totalFaltas >= 350;
+
+  const badgePerigo = document.getElementById("estadoFaltas");
+  const cardFaltas = document.getElementById("card-grafico-faltas");
+
+  if (badgePerigo) {
+    badgePerigo.hidden = !situacaoCritica;
+  }
+
+  if (cardFaltas) {
+    if (situacaoCritica) {
+      cardFaltas.classList.add("grafico-card-perigo");
+    } else {
+      cardFaltas.classList.remove("grafico-card-perigo");
+    }
+  }
+
+  const corBarra = situacaoCritica ? "rgba(220, 38, 38, 0.85)" : "rgba(55, 65, 81, 0.82)";
+  const corBordaBarra = situacaoCritica ? "#b91c1c" : "#1f2937";
+
+  graficoFaltas = new Chart(canvas, {
+    type: "bar",
+    data: {
+      labels: ["1º Tri", "2º Tri", "3º Tri"],
+      datasets: [
+        {
+          label: "Faltas",
+          data: [faltasTri1, faltasTri2, faltasTri3],
+          backgroundColor: corBarra,
+          borderColor: corBordaBarra,
+          borderWidth: 1,
+          borderRadius: 6
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: {
+          display: false
+        },
+        tooltip: {
+          callbacks: {
+            label: function (contexto) {
+              const valor = contexto.parsed.y;
+              return contexto.label + ": " + valor + (valor === 1 ? " falta" : " faltas");
+            }
+          }
+        }
+      },
+      scales: {
+        y: {
+          beginAtZero: true,
+          ticks: {
+            color: "#4b5563",
+            precision: 0
+          },
+          grid: {
+            color: "#e5e7eb"
+          }
+        },
+        x: {
+          ticks: {
+            color: "#374151",
+            font: {
+              weight: "600"
+            }
+          },
+          grid: {
+            display: false
+          }
+        }
+      }
+    }
+  });
+}
+
+function atualizarGraficos() {
+  atualizarGraficoMedias();
+  atualizarGraficoEvolucao();
+  atualizarGraficoFaltas();
+}
+
+// =========================================================
+// FLUXO PROTEGIDO DE AUTENTICAÇÃO, EDIÇÃO E SALVAMENTO
+// =========================================================
+
 // Autenticação e carregamento do boletim pela API
 async function abrirBoletim(event) {
   event.preventDefault();
@@ -402,6 +711,7 @@ async function abrirBoletim(event) {
     modoEdicao = false;
     alternarBotoesEdicao(false);
     renderizarBoletim();
+    atualizarGraficos();
   } catch (erro) {
     definirMensagem("mensagem-acesso", "Não foi possível conectar ao servidor. Tente novamente.", "erro");
   } finally {
@@ -515,6 +825,7 @@ async function salvarAlteracoes() {
     modoEdicao = false;
     alternarBotoesEdicao(false);
     renderizarBoletim();
+    atualizarGraficos();
     definirMensagem("mensagem-edicao", "Dados salvos com sucesso.", "sucesso");
   } catch (erro) {
     definirMensagem("mensagem-edicao", "Não foi possível conectar ao servidor. Tente novamente.", "erro");

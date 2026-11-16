@@ -75,6 +75,39 @@
 
       </section>
 
+      <!-- Área dos gráficos de desempenho e frequência -->
+      <section class="area-graficos" aria-label="Gráficos de desempenho">
+
+        <article class="grafico-card grafico-card-disciplinas">
+          <div class="grafico-topo">
+            <h2>Média por disciplina</h2>
+          </div>
+          <div class="grafico-container grafico-container-disciplinas">
+            <canvas id="graficoMediasDisciplinas"></canvas>
+          </div>
+        </article>
+
+        <article class="grafico-card">
+          <div class="grafico-topo">
+            <h2>Evolução da média geral</h2>
+          </div>
+          <div class="grafico-container">
+            <canvas id="graficoEvolucaoTrimestres"></canvas>
+          </div>
+        </article>
+
+        <article class="grafico-card" id="card-grafico-faltas">
+          <div class="grafico-topo">
+            <h2>Faltas por trimestre</h2>
+            <span id="estadoFaltas" class="badge-perigo" hidden>Perigo</span>
+          </div>
+          <div class="grafico-container">
+            <canvas id="graficoFaltasTrimestres"></canvas>
+          </div>
+        </article>
+
+      </section>
+
       <!-- Seção da tabela de notas -->
       <section class="secao-tabela">
         <div class="tabela-topo">
@@ -113,6 +146,8 @@
 
   </main>
 
+  <!-- Biblioteca Chart.js para os gráficos -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <!-- Conecta o arquivo de lógica (JavaScript) no final da página -->
   <script src="script.js"></script>
 </body>
